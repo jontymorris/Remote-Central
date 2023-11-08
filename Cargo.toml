@@ -1,0 +1,9 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "remote_core",
+    "remote_client",
+    "remote_server",
+    "remote_cli"
+]

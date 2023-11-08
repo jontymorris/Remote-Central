@@ -1,11 +1,10 @@
 [package]
-name = "remote_server"
+name = "remote_core"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-dotenvy = "0.15.7"
-actix-web = "4"
+chrono = {version = "0.4.31", features = ["serde"] }
 serde = { version = "1.0.192", features = ["derive"] }
 serde_json = "1.0.108"
-remote_core = { path = "../remote_core/" }
+dotenvy = "0.15.7"
