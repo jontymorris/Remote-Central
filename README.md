@@ -5,7 +5,7 @@ Remote Central will help you with this endeavour by syncing your desktop/s with 
 
 ## Setting up
 
-You will need a server to sync your desktop/s with. Any server Rust can compile on will do. Ideally, it will have a static IP or a domain name so your computers will never have trouble finding the server.
+You will need a server to sync your desktop/s with. Any server capable of running Rust binaries will do. Ideally, it will have a static IP or a domain name so your computers will never have trouble finding the server.
 
 Then setup the remote-server and remote-cli on your server machine. The remote-server handles the ping requests from your desktop clients, and the remote-cli lets you manage your machines from the server (I didn't need a fancy desktop GUI at the time but this may come in the future).
 
