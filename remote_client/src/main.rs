@@ -1,9 +1,9 @@
-use std::env;
-use std::process::Command as SystemCommand;
 use dotenvy::dotenv;
-use reqwest::Client;
 use remote_core::Command as RemoteCommand;
 use remote_core::{Ping, Pong};
+use reqwest::Client;
+use std::env;
+use std::process::Command as SystemCommand;
 
 async fn ping() -> Result<Vec<RemoteCommand>, Box<dyn std::error::Error>> {
     let server_url = env::var("SERVER").expect("Server must be specified");

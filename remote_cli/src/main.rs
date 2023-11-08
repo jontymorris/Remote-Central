@@ -1,6 +1,8 @@
-use dotenvy::dotenv;
 use clap::Parser;
-use remote_core::{get_recent_clients, get_commands_done_for_ip, add_command_for_ip, get_commands_queue_for_ip};
+use dotenvy::dotenv;
+use remote_core::{
+    add_command_for_ip, get_commands_done_for_ip, get_commands_queue_for_ip, get_recent_clients,
+};
 
 #[derive(Parser, Debug)]
 #[command(author = None, version = None, about = "Remote Central CLI", long_about = None)]
@@ -15,7 +17,7 @@ struct Args {
     ip: Option<String>,
 
     #[arg(long, help = "Specify a client command to issue")]
-    command: Option<String>
+    command: Option<String>,
 }
 
 fn main() {
@@ -32,7 +34,10 @@ fn main() {
     }
 
     if args.command.is_some() {
-        add_client_command(args.ip.clone().expect("IP must be specified"), args.command.unwrap());
+        add_client_command(
+            args.ip.clone().expect("IP must be specified"),
+            args.command.unwrap(),
+        );
     }
 }
 
@@ -44,7 +49,7 @@ fn print_clients() {
         println!("No connected clients");
         return;
     }
-    
+
     println!("Connected clients:");
     for client in clients {
         let difference = now - client.date;
@@ -75,7 +80,12 @@ fn print_client_history(ip: String) {
 
         for command in done_commands {
             let difference = now - command.date;
-            println!("\t{} ({}s ago): {}", command.command, difference.num_seconds(), command.output.unwrap_or_default());
+            println!(
+                "\t{} ({}s ago): {}",
+                command.command,
+                difference.num_seconds(),
+                command.output.unwrap_or_default()
+            );
         }
 
         println!("");

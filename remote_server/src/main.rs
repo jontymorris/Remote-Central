@@ -1,11 +1,14 @@
 use std::{env, net::IpAddr};
 
-use actix_web::{HttpServer, App, Responder, HttpResponse, post, HttpRequest};
+use actix_web::{post, App, HttpRequest, HttpResponse, HttpServer, Responder};
 use dotenvy::dotenv;
-use remote_core::{add_or_update_client, get_commands_queue_for_ip, update_commands_for_ip, Ping, Pong};
+use remote_core::{
+    add_or_update_client, get_commands_queue_for_ip, update_commands_for_ip, Ping, Pong,
+};
 
 fn get_client_ip(request: HttpRequest) -> String {
-    request.peer_addr()
+    request
+        .peer_addr()
         .map(|socket_addr| {
             // Extract the IP address without the port
             let ip: IpAddr = socket_addr.ip();
@@ -57,12 +60,8 @@ async fn main() -> std::io::Result<()> {
 
     println!("Remote Central Server running");
 
-    HttpServer::new(|| {
-        App::new()
-            .service(ping)
-            .service(pong)
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+    HttpServer::new(|| App::new().service(ping).service(pong))
+        .bind(("127.0.0.1", 8080))?
+        .run()
+        .await
 }
